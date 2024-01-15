@@ -5,12 +5,10 @@ import java.util.List;
 
 public class Book {
     private String title;
-
     private List<Element> sections;
     private List<Author> authors;
     public Book(String title, List<Chapter> chapters){
         this.title = title;
-
         this.sections = sections;
     }
 
