@@ -2,16 +2,58 @@ package com.example.lab_1_sp.services;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
+import com.example.lab_1_sp.services.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.lab_1_sp.services.BooksService;
 import com.example.lab_1_sp.models.*;
+import java.util.List;
 
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
+    private BooksService booksService;
+
+    @Autowired
+    public BookController(BooksService booksService) {
+        this.booksService = booksService;
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Book>> getAllBooks(){
+        List<Book> books = booksService.getAllBooks();
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
+    @GetMapping("/{name}")
+    public ResponseEntity<Book> getBookById(@PathVariable String name){
+        Book book = booksService.getBookByName(name);
+        if(book == null)
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(book, HttpStatus.OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<?> addBook(@RequestBody Book book){
+        booksService.addBook(book);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{name}")
+    public ResponseEntity<?> deleteBook(@PathVariable String name){
+        Book book = booksService.getBookByName(name);
+        if(book == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        booksService.deleteBook(book);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateBook(@RequestBody Book book){
+        booksService.updateBook(book);
+        return new ResponseEntity<>(HttpStatus.OK);
+}
 
     @GetMapping("/statistics")
     public ResponseEntity<?> printStatistics(){
@@ -33,4 +75,10 @@ public class BookController {
         stats.printStatistics();
         return new ResponseEntity<>("", HttpStatus.OK);
 }
+
+    public void createBook(Book book) {
+    }
+
+    public void getAll() {
+    }
 }
