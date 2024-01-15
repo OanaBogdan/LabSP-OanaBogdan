@@ -1,6 +1,8 @@
 package com.example.lab_1_sp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 public class SabloaneLabApp {
 
@@ -32,25 +34,26 @@ public class SabloaneLabApp {
         System.out.println("Printing again the section 1 took " + (endTime -
                 startTime) + " milliseconds");*/
 
-        Section cap1 = new Section("Capitolul 1");
-        Paragraph p1 = new Paragraph("Paragraph 1");
-        cap1.add(p1);
-        Paragraph p2 = new Paragraph("Paragraph 2");
-        cap1.add(p2);
-        Paragraph p3 = new Paragraph("Paragraph 3");
-        cap1.add(p3);
-        Paragraph p4 = new Paragraph("Paragraph 4");
-        cap1.add(p4);
-        System.out.println("Printing without Alignment");
-        System.out.println();
-        cap1.print();
-        p1.setAlignStrategy(new AlignCenter());
-        p2.setAlignStrategy(new AlignRight());
-        p3.setAlignStrategy(new AlignLeft());
+ lab6
+        ApplicationContext context = SpringApplication.run(SabloaneLabApp.class, args);
+        TransientComp transientBean = context.getBean(TransientComp.class);
+        transientBean.operation();
 
-        System.out.println();
-        System.out.println("Printing with Alignment");
-        System.out.println();
-        cap1.print();
+        transientBean = context.getBean(TransientComp.class);
+        transientBean.operation();
+
+        SingletonComp singletonBean = context.getBean(SingletonComp.class);
+        singletonBean.operation();
+
+        singletonBean = context.getBean(SingletonComp.class);
+        singletonBean.operation();
+
+        ClientComp c = context.getBean(ClientComp.class);
+        c.operation();
+
+        c = (ClientComp)context.getBean("clientComponent");
+        c.operation();
+
+ 
     }
 }
