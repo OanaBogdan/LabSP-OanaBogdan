@@ -2,13 +2,20 @@ package com.example.lab_1_sp;
 
 public class Paragraph implements Element{
     private String name;
+    private AlignStrategy alignStrategy;
     public Paragraph(String name){
         this.name = name;
+        alignStrategy = new AlignLeft();
     }
 
     @Override
     public void print(){
-        System.out.println("Paragraph: " + name);
+        if(alignStrategy == null){
+            System.out.println(" Paragraph: "   + name);
+        }
+        else{
+            alignStrategy.render(name);
+        }
     }
 
     @Override
@@ -24,5 +31,9 @@ public class Paragraph implements Element{
     @Override
     public Element get(int i) {
         throw new UnsupportedOperationException();
+    }
+
+    public void setAlignStrategy(AlignStrategy alignStrategy){
+        this.alignStrategy = alignStrategy;
     }
 }
