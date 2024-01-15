@@ -1,4 +1,4 @@
-package com.example.lab_1_sp;
+package com.example.lab_1_sp.models;
 import java.awt.*;
 
 public class ImageProxy implements Picture, Element{
@@ -15,7 +15,7 @@ public class ImageProxy implements Picture, Element{
         this.realImage = realImage;
     }
 
-    ImageProxy(String url){
+    public ImageProxy(String url){
         this.url = url;
         dim = null;
         realImage = null;
@@ -35,7 +35,7 @@ public class ImageProxy implements Picture, Element{
         return null;
     }
 
-    private Image loadImage(){
+    public Image loadImage(){
         if (realImage == null) {
             realImage = new Image(url);
         }
@@ -61,4 +61,9 @@ public class ImageProxy implements Picture, Element{
     public Element get(int i) {
         return null;
     }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitImageProxy(this);
+}
 }

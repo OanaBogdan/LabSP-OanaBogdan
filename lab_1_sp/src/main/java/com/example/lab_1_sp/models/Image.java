@@ -1,4 +1,4 @@
-package com.example.lab_1_sp;
+package com.example.lab_1_sp.models;
 import java.util.concurrent.TimeUnit;
 
 public class Image implements Element{
@@ -15,7 +15,7 @@ public class Image implements Element{
         }
     }
 
-        Image(String url){
+        public Image(String url){
             this.url = url;
             try{
                 TimeUnit.SECONDS.sleep(5);
@@ -44,4 +44,13 @@ public class Image implements Element{
     public Element get(int i) {
         throw new UnsupportedOperationException();
     }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitImage(this);
+    }
+
+    public String getImageName() {
+        return name;
+}
 }

@@ -1,4 +1,4 @@
-package com.example.lab_1_sp;
+package com.example.lab_1_sp.models;
 
 public class Table implements Element{
     private String name;
@@ -24,4 +24,12 @@ public class Table implements Element{
     public Element get(int i) {
         throw new UnsupportedOperationException();
     }
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitTable(this);
+    }
+
+    public String getTitle() {
+        return name;
+}
 }

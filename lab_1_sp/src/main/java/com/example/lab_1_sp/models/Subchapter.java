@@ -1,4 +1,4 @@
-package com.example.lab_1_sp;
+package com.example.lab_1_sp.models;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,5 +41,9 @@ public class Subchapter {
             e.print();
             System.out.println('\n');
         }
+    }
+
+    public String getTitle() {
+        return name;
     }
 }
