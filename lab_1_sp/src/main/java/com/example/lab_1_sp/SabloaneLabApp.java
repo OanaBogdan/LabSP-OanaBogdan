@@ -34,6 +34,7 @@ public class SabloaneLabApp {
         System.out.println("Printing again the section 1 took " + (endTime -
                 startTime) + " milliseconds");*/
 
+ lab6
         ApplicationContext context = SpringApplication.run(SabloaneLabApp.class, args);
         TransientComp transientBean = context.getBean(TransientComp.class);
         transientBean.operation();
@@ -52,5 +53,7 @@ public class SabloaneLabApp {
 
         c = (ClientComp)context.getBean("clientComponent");
         c.operation();
+
+ 
     }
 }
