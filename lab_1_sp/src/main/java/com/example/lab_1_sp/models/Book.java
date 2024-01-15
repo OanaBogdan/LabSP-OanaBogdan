@@ -1,4 +1,4 @@
-package com.example.lab_1_sp;
+package com.example.lab_1_sp.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,4 +48,15 @@ public class Book {
             if(sections == null) sections = new ArrayList<Element>();
             sections.add(paragraph);
         }
+    public String getTitle() {
+        return title;
+    }
+
+    public Iterable<? extends Author> getAuthors() {
+        return authors;
+    }
+
+    public List<Element> getSections(){
+        return sections;
+}
 }

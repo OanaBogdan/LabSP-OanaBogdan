@@ -1,4 +1,7 @@
-package com.example.lab_1_sp;
+package com.example.lab_1_sp.models;
+
+import com.example.lab_1_sp.services.AlignStrategy;
+import  com.example.lab_1_sp.services.AlignLeft;
 
 public class Paragraph implements Element{
     private String name;
@@ -36,4 +39,13 @@ public class Paragraph implements Element{
     public void setAlignStrategy(AlignStrategy alignStrategy){
         this.alignStrategy = alignStrategy;
     }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitParagraph(this);
+    }
+
+    public String getText() {
+        return name;
+}
 }

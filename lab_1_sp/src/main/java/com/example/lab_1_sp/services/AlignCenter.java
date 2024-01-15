@@ -1,4 +1,4 @@
-package com.example.lab_1_sp;
+package com.example.lab_1_sp.services;
 
 public class AlignCenter implements AlignStrategy{
 

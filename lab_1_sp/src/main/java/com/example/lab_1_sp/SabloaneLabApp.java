@@ -1,9 +1,14 @@
 package com.example.lab_1_sp;
+
+import com.example.lab_1_sp.services.ClientComp;
+import com.example.lab_1_sp.services.SingletonComp;
+import com.example.lab_1_sp.services.TransientComp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
+@ComponentScan(basePackages = {"com.example.lab_1_sp.models", "com.example.lab_1_sp.services"})
 public class SabloaneLabApp {
 
     public static void main(String[] args) {
@@ -34,7 +39,7 @@ public class SabloaneLabApp {
         System.out.println("Printing again the section 1 took " + (endTime -
                 startTime) + " milliseconds");*/
 
- lab6
+
         ApplicationContext context = SpringApplication.run(SabloaneLabApp.class, args);
         TransientComp transientBean = context.getBean(TransientComp.class);
         transientBean.operation();
