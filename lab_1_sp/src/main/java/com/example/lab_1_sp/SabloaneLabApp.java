@@ -1,12 +1,16 @@
 package com.example.lab_1_sp;
 
-import com.example.lab_1_sp.services.ClientComp;
-import com.example.lab_1_sp.services.SingletonComp;
-import com.example.lab_1_sp.services.TransientComp;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import com.example.lab_1_sp.models.Book;
+import com.example.lab_1_sp.models.Element;
+import com.example.lab_1_sp.models.Paragraph;
+import com.example.lab_1_sp.models.Section;
+import com.example.lab_1_sp.services.*;
+import java.util.List;
+
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.example.lab_1_sp.models", "com.example.lab_1_sp.services"})
 public class SabloaneLabApp {
@@ -41,7 +45,7 @@ public class SabloaneLabApp {
 
 
         ApplicationContext context = SpringApplication.run(SabloaneLabApp.class, args);
-        TransientComp transientBean = context.getBean(TransientComp.class);
+        /*TransientComp transientBean = context.getBean(TransientComp.class);
         transientBean.operation();
 
         transientBean = context.getBean(TransientComp.class);
@@ -57,7 +61,21 @@ public class SabloaneLabApp {
         c.operation();
 
         c = (ClientComp)context.getBean("clientComponent");
-        c.operation();
+        c.operation();*/
+
+        BooksService booksService = context.getBean(BooksService.class);
+        BookController bookController = context.getBean(BookController.class);
+
+        Book book = new Book("Carte1");
+
+        Section cap1 = new Section("Capitolul 1");
+        cap1.add(new Paragraph("Paragraph 1"));
+        cap1.add(new Paragraph("Paragraph 2"));
+        cap1.add(new Paragraph("Paragraph 3"));
+        book.addContent(cap1);
+        book.addContent(new Paragraph("Multumesc!"));
+        bookController.createBook(book);
+        bookController.getAll();
 
  
     }
